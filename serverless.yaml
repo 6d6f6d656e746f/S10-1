@@ -1,0 +1,83 @@
+org: valentinoc
+service: api-alumnos
+
+provider:
+  name: aws
+  runtime: python3.12
+  timeout: 30  
+  iam:
+    role: arn:aws:iam::175670145706:role/LabRole
+
+functions:
+  listar:
+    handler: ListarAlumnos.lambda_handler
+    events:
+      - http:
+          path: /alumnos/listar
+          method: post
+          cors: true
+          integration: lambda
+  crearUsuario:
+    handler: Lambda_CrearUsuario.lambda_handler
+    events:
+      - http:
+          path: /usuarios/crear
+          method: post
+          cors: true
+          integration: lambda
+  loginUsuario:
+    handler: Lambda_LoginUsuario.lambda_handler
+    events:
+      - http:
+          path: /usuarios/login
+          method: post
+          cors: true
+          integration: lambda
+  validarToken:
+    handler: Lambda_ValidarTokenAcceso.lambda_handler
+    events:
+      - http:
+          path: /token/validar
+          method: post
+          cors: true
+          integration: lambda
+  crearProducto:
+    handler: LambdaCrearProducto.lambda_handler
+    events:
+      - http:
+          path: /productos/crear
+          method: post
+          cors: true
+          integration: lambda
+  listarProductos:
+    handler: Lambda_ListarProductos.lambda_handler
+    events:
+      - http:
+          path: /productos/listar
+          method: post
+          cors: true
+          integration: lambda
+  buscarProducto:
+    handler: Lambda_BuscarProducto.lambda_handler
+    events:
+      - http:
+          path: /productos/buscar
+          method: post
+          cors: true
+          integration: lambda
+  modificarProducto:
+    handler: Lambda_ModificarProducto.lambda_handler
+    events:
+      - http:
+          path: /productos/modificar
+          method: put
+          cors: true
+          integration: lambda
+  eliminarProducto:
+    handler: Lambda_EliminarProducto.lambda_handler
+    events:
+      - http:
+          path: /productos/eliminar
+          method: delete
+          cors: true
+          integration: lambda
